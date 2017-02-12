@@ -4,6 +4,8 @@ A place to create, store and share Nexmo NCCO JSON instructions.
 
 **Status: Work in Progress**
 
+![NCCO bin screenshot](ncco-bin.png)
+
 ## Running locally
 
 Before you being you will need:
