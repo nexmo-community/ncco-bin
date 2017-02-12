@@ -22,6 +22,16 @@ app.get('/', (request, response) => {
   response.render('pages/index');
 });
 
+app.get('/bins/:binId', (req, res) => {
+  var bin = store.read(req.params.binId);
+  if(!bin) {
+    res.redirect('/');
+  }
+  else {
+    res.render('pages/index');
+  }
+});
+
 app.post('/bins', (req, res) => {
   var bin = {
     id: req.body.id,

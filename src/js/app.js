@@ -13,27 +13,16 @@ var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
   }
 });
 
-var binIdEl = document.getElementById('bin_id');
-var parseErrorEl = document.getElementById('parse_message');
+const binIdEl = document.getElementById('bin_id');
+const parseErrorEl = document.getElementById('parse_message');
 
-/*
-If no bin presently exists create one
-POST /bins
-{
-  "ncco": "contents of editor"
-}
-
-Response:
-
-{
-  "id": "unique id that can be used upon calling",
-  "ncco": "ncco contents JSON"
-}
-*/
+var binMatch = document.location.pathname.match(/(\/bins\/)(\d+)/);
 var bin = {
-  id: null,
+  id: (binMatch && binMatch[2]? binMatch[2] : null),
   ncco: null
 };
+binIdEl.textContent = (bin.id !== null? bin.id : 'not saved');
+
 function update() {
   try {
     var ncco = JSON.parse(editor.getValue())
@@ -47,6 +36,20 @@ function update() {
     return;
   }
   
+  /*
+  If no bin presently exists create one
+  POST /bins
+  {
+    "ncco": "contents of editor"
+  }
+
+  Response:
+
+  {
+    "id": "unique id that can be used upon calling",
+    "ncco": "ncco contents JSON"
+  }
+  */
   fetch('/bins', {
     method: 'POST',
     headers: {
@@ -64,5 +67,4 @@ function update() {
   });
 }
 
-console.log('registering for "change"');
 editor.on('change', update);
