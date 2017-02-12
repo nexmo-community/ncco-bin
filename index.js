@@ -25,10 +25,14 @@ app.get('/', (request, response) => {
 app.get('/bins/:binId', (req, res) => {
   var bin = store.read(req.params.binId);
   if(!bin) {
-    res.redirect('/');
+    return res.redirect('/');
+  }
+  
+  if(req.get('Content-Type') === 'application/json') {
+    res.json(bin);
   }
   else {
-    res.render('pages/index');
+    res.render('pages/index', {bin, bin});  
   }
 });
 

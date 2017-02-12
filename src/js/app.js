@@ -25,8 +25,10 @@ binIdEl.textContent = (bin.id !== null? bin.id : 'not saved');
 
 function update() {
   try {
-    var ncco = JSON.parse(editor.getValue())
-    bin.ncco = JSON.stringify(ncco);
+    // test parse
+    var ncco = editor.getValue();
+    JSON.parse(ncco)
+    bin.ncco = ncco;
     
     parseErrorEl.textContent = '';
   }
