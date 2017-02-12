@@ -1,3 +1,28 @@
 body {
   font-family: monospace;
 }
+
+i, code {
+  background-color: #002744;
+  color: #fff;
+  padding: 2px;
+  font-style: normal;
+}
+
+h1.site-h1 {
+  padding-left: 50px;
+  background-image: url(/img/nexmo_o.png);
+  background-repeat: no-repeat;;
+  line-height: 40px;
+  vertical-align: middle;
+}
+
+#bin_status .error {
+  background-color: #f0537a;
+  color: #fff;
+}
+
+#bin_status .success {
+  background-color: #2db276;
+  color: #fff;
+}

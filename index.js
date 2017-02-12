@@ -5,6 +5,21 @@ const bodyParser = require('body-parser');
 const Store = require('./store');
 const store = new Store();
 
+require('dotenv').config();
+
+const BIN_PHONE_NUMBER = process.env.BIN_PHONE_NUMBER;
+const BIN_BASE_URL = process.env.BIN_BASE_URL;
+const NCCO_TEMPLACE = `[
+  {
+    "action": "talk",
+    "text": "Welcome to a Nexmo conference call via N C C O bin."
+  },
+  {
+    "action": "conversation",
+    "name": "nexmo-conference"
+  }
+]`;
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(bodyParser.json());
@@ -18,8 +33,9 @@ app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port'));
 });
 
-app.get('/', (request, response) => {
-  response.render('pages/index');
+app.get('/', (req, res) => {
+  var nextBin = store.create(NCCO_TEMPLACE);
+  res.redirect(`/bins/${nextBin.id}`);
 });
 
 app.get('/bins/:binId', (req, res) => {
@@ -29,15 +45,21 @@ app.get('/bins/:binId', (req, res) => {
   }
   
   if(req.get('Content-Type') === 'application/json') {
-    res.json(bin);
+    const ncco = JSON.parse(bin.ncco.replace('\n', ''));
+    res.json(ncco);
   }
   else {
-    res.render('pages/index', {bin, bin});  
+    const binUrl = `${BIN_BASE_URL}/bins/${bin.id}`;
+    res.render('pages/index', {
+      bin: bin,
+      nccoBinPhoneNumber: BIN_PHONE_NUMBER,
+      binUrl: binUrl
+    });  
   }
 });
 
 app.post('/bins', (req, res) => {
-  var bin = {
+  let bin = {
     id: req.body.id,
     ncco: req.body.ncco
   };
@@ -50,4 +72,46 @@ app.post('/bins', (req, res) => {
     bin = store.update(bin.id, bin.ncco);
   }
   res.json(bin);
+});
+
+app.get('/answer', (req, res) => {
+  // Prompt the user for their NCCO ID
+  const ncco = [
+    {
+      action: 'talk',
+      text: 'Please enter your N C C O bin ID followed by the hash key',
+      timeOut: 5,
+      bargeIn: true,
+      voiceName: 'Amy'
+    },
+    {
+      action: 'input',
+      submitOnHash: true,
+      eventUrl: ['https://nexmo.ngrok.io/find-bin']
+    }
+  ];
+  
+  res.json(ncco);
+});
+
+app.post('/find-bin', (req, res) => {
+  const binId = req.body.dtmf;
+  let bin = store.read(binId);
+  let ncco = null;
+  
+  if(!bin) {
+    ncco = [{
+      action: 'talk',
+      text: `Error. Cannot find N C C O bin with I D of . ${binId.replace(/(\d)/g, '$1 ')}`,
+      voiceName: 'Amy'
+    }];
+  }
+  else {
+    ncco = JSON.parse(bin.ncco.replace('\n', ''));
+  }
+  res.json(ncco);
+});
+
+app.post('/events', (req, res) => {
+  // TODO: push events to the relevant NCCO view
 });

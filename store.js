@@ -1,3 +1,6 @@
+/**
+ * An in-memory store example.
+ */
 class Store {
   constructor() {
     this.bins = {};

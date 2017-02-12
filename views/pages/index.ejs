@@ -5,21 +5,14 @@
 </head>
 
 <body>
-  <h1>NCCO bin</h1>
-  <h2>ID {<span id="bin_id">not saved</span>}</h2>
+  <h1 class="site-h1">NCCO bin</h1>
+  <h2>bin ID <a href="<%=binUrl%>"><span class="bin-id"><%=bin.id%></span></a>
+  </h2>
+  <p>To test your NCCO call <i><%=nccoBinPhoneNumber%></i> and input your NCCO bin ID of <i><%-bin.id%></i>.</p>
+  <p>To use the NCCO set your Nexmo Voice Application <code>answer_url</code> to <code><%=binUrl%></code>.<p>
   
-  <textarea id="editor"><% if (typeof bin === 'object') { %><%-bin.ncco%><% } else {
-%>[
-  {
-    "action": "talk",
-    "text": "Welcome to a Nexmo conference call via N C C O bin"
-  },
-  {
-    "action": "conversation",
-    "name": "nexmo-conference"
-  }
-]<% } %></textarea>
-  <div id="parse_message"></div>
+  <textarea id="editor"><%-bin.ncco%></textarea>
+  <div id="bin_status"></div>
 
   <script src="/js/app.min.js"></script>
 </body>

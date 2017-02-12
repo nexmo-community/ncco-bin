@@ -13,15 +13,13 @@ var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
   }
 });
 
-const binIdEl = document.getElementById('bin_id');
-const parseErrorEl = document.getElementById('parse_message');
+const binStatusEl = document.getElementById('bin_status');
 
 var binMatch = document.location.pathname.match(/(\/bins\/)(\d+)/);
 var bin = {
   id: (binMatch && binMatch[2]? binMatch[2] : null),
   ncco: null
 };
-binIdEl.textContent = (bin.id !== null? bin.id : 'not saved');
 
 function update() {
   try {
@@ -29,11 +27,9 @@ function update() {
     var ncco = editor.getValue();
     JSON.parse(ncco)
     bin.ncco = ncco;
-    
-    parseErrorEl.textContent = '';
   }
   catch(e) {
-    parseErrorEl.textContent = e.message;
+    binStatusEl.innerHTML = `<span class="error">${e.message}</span>`;
     console.error('Bin does not contain valid JSON. Not saving.', e);
     return;
   }
@@ -61,10 +57,10 @@ function update() {
   }).then((res) => {
     return res.json();
   }).then((json) => {
-    console.log('Updating bin', json);
-    bin = json;
-    binIdEl.textContent = bin.id;
+    console.log('bin updated', json);
+    binStatusEl.innerHTML = `<span class="success">bin successfully saved</span>`;
   }).catch((err) => {
+    binStatusEl.innerHTML = `<span class="error">Error updating bin: ${err.message}</span>`;
     console.error(err);
   });
 }
