@@ -8,18 +8,17 @@
   <h1>NCCO bin</h1>
   <h2>ID {<span id="bin_id">not saved</span>}</h2>
   
-  <textarea id="editor">
-  [
-    {
-      "action": "talk",
-      "text": "Welcome to a Nexmo conference call via N C C O bin"
-    },
-    {
-      "action": "conversation",
-      "name": "nexmo-conference"
-    }
-  ]
-  </textarea>
+  <textarea id="editor"><% if (typeof bin === 'object') { %><%-bin.ncco%><% } else {
+%>[
+  {
+    "action": "talk",
+    "text": "Welcome to a Nexmo conference call via N C C O bin"
+  },
+  {
+    "action": "conversation",
+    "name": "nexmo-conference"
+  }
+]<% } %></textarea>
   <div id="parse_message"></div>
 
   <script src="/js/app.min.js"></script>
