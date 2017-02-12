@@ -8,7 +8,7 @@ A place to create, store and share Nexmo NCCO JSON instructions.
 
 ## Running locally
 
-Before you being you will need:
+Before you begin you will need:
 
 * ngrok or another local tunnel solution
 * A [Nexmo account](https://dashboard.nexmo.com/signup) that has had at least one top up and has some credit
