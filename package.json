@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"./node_modules/.bin/rollup -c\" \"nodemon index.js\"",
+    "start": "concurrently \"./node_modules/.bin/rollup --watch -c\" \"nodemon index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -19,13 +19,16 @@
     "body-parser": "^1.16.1",
     "codemirror": "^5.23.0",
     "ejs": "^2.5.5",
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
     "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-css-only": "^0.2.0",
-    "rollup-plugin-node-resolve": "^2.0.0"
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-watch": "^3.2.2"
   }
 }
