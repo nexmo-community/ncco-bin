@@ -1,0 +1,30 @@
+{
+  "name": "ncco-bin",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nexmo",
+    "ncco",
+    "voice",
+    "conversation"
+  ],
+  "author": "Phil Leggetter <phil@leggetter.co.uk> (http://www.leggetter.co.uk/)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "codemirror": "^5.23.0",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0"
+  }
+}
