@@ -24,6 +24,7 @@
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
+    "concurrently": "^3.3.0",
     "nodemon": "^1.11.0",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",

@@ -43,7 +43,7 @@ app.get('/bins/:binId', (req, res) => {
   if(!bin) {
     return res.redirect('/');
   }
-  
+
   if(req.get('Content-Type') === 'application/json') {
     const ncco = JSON.parse(bin.ncco.replace('\n', ''));
     res.json(ncco);
@@ -54,7 +54,7 @@ app.get('/bins/:binId', (req, res) => {
       bin: bin,
       nccoBinPhoneNumber: BIN_PHONE_NUMBER,
       binUrl: binUrl
-    });  
+    });
   }
 });
 
@@ -63,7 +63,7 @@ app.post('/bins', (req, res) => {
     id: req.body.id,
     ncco: req.body.ncco
   };
-  
+
   console.log('POST /bins', bin);
   if(bin.id === null || bin.id === undefined) {
     bin = store.create(bin.ncco);
@@ -87,10 +87,10 @@ app.get('/answer', (req, res) => {
     {
       action: 'input',
       submitOnHash: true,
-      eventUrl: ['https://nexmo.ngrok.io/find-bin']
+      eventUrl: [`${BIN_BASE_URL}/find-bin`]
     }
   ];
-  
+
   res.json(ncco);
 });
 
@@ -98,7 +98,7 @@ app.post('/find-bin', (req, res) => {
   const binId = req.body.dtmf;
   let bin = store.read(binId);
   let ncco = null;
-  
+
   if(!bin) {
     ncco = [{
       action: 'talk',
