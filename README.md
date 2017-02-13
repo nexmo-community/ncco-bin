@@ -16,6 +16,7 @@ Before you begin you will need:
 Clone and install dependencies:
 
 ```bash
+npm install -g concurrently
 git clone git@github.com:nexmo-community/ncco-bin.git
 cd ncco-bin
 npm install
@@ -40,7 +41,7 @@ The above command will save a private key to `private.key` in the current direct
 Buy a number to associate it with your NCCO bin Nexmo Voice application. Update the `US` in the command to another country code as required. This will charge your account.
 
 ```bash
-nexmo number:buy -c US --confirm.
+nexmo number:buy -c US --confirm
 ```
 
 The previous step will provide you with a phone number. Use this in the next step.
@@ -66,6 +67,8 @@ Run the local NCCO bin instance.
 ```bash
 npm start
 ```
+
+Go to `http://127.0.0.1:5000/`
 
 ## License
 
