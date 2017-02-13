@@ -16,7 +16,6 @@ Before you begin you will need:
 Clone and install dependencies:
 
 ```bash
-npm install -g concurrently
 git clone git@github.com:nexmo-community/ncco-bin.git
 cd ncco-bin
 npm install
