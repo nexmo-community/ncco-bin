@@ -7,8 +7,8 @@ const store = new Store();
 
 require('dotenv').config();
 
-const BIN_PHONE_NUMBER = process.env.BIN_PHONE_NUMBER;
-const BIN_BASE_URL = process.env.BIN_BASE_URL;
+const BIN_PHONE_NUMBER = process.env.MY_LVN;
+const BIN_BASE_URL = process.env.HOSTNAME;
 const NCCO_TEMPLACE = `[
   {
     "action": "talk",
