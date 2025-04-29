@@ -20,7 +20,7 @@
     "codemirror": "^5.23.0",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.5",
-    "express": "^4.14.1",
+    "express": "^4.21.1",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
