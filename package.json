@@ -16,7 +16,7 @@
   "author": "Phil Leggetter <phil@leggetter.co.uk> (http://www.leggetter.co.uk/)",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.16.1",
+    "body-parser": "^1.20.6",
     "codemirror": "^5.23.0",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.5",
